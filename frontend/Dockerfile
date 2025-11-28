@@ -11,7 +11,6 @@ COPY index.html ./
 COPY tsconfig.json ./
 COPY tsconfig.node.json ./
 COPY vite.config.ts ./
-COPY public ./public
 
 RUN npm run build
 
