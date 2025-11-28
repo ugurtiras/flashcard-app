@@ -94,13 +94,12 @@ jobs:
         context: ./backend
         file: ./backend/Dockerfile
         push: true
+        no-cache: true
         tags: |
           ghcr.io/${{ github.repository }}/backend:latest
           ghcr.io/${{ github.repository }}/backend:${{ github.sha }}
           ${{ secrets.DOCKERHUB_USERNAME }}/flashcard-backend:latest
           ${{ secrets.DOCKERHUB_USERNAME }}/flashcard-backend:${{ github.sha }}
-        cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/backend:buildcache
-        cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/backend:buildcache,mode=max
 
     - name: Build and push frontend image
       uses: docker/build-push-action@v5
@@ -108,10 +107,9 @@ jobs:
         context: ./frontend
         file: ./frontend/Dockerfile
         push: true
+        no-cache: true
         tags: |
           ghcr.io/${{ github.repository }}/frontend:latest
           ghcr.io/${{ github.repository }}/frontend:${{ github.sha }}
           ${{ secrets.DOCKERHUB_USERNAME }}/flashcard-frontend:latest
           ${{ secrets.DOCKERHUB_USERNAME }}/flashcard-frontend:${{ github.sha }}
-        cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/frontend:buildcache
-        cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/frontend:buildcache,mode=max
